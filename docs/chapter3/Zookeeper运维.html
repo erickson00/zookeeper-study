@@ -1,0 +1,357 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Zookeeper运维 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../chapter4/Zookeeper进阶.html" />
+    
+    
+    <link rel="prev" href="../chapter2/Zookeeper开发.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    SICP学习记录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../chapter1/Zookeeper基础.html">
+            
+                <a href="../chapter1/Zookeeper基础.html">
+            
+                    
+                    Zookeeper基础
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../chapter2/Zookeeper开发.html">
+            
+                <a href="../chapter2/Zookeeper开发.html">
+            
+                    
+                    Zookeeper开发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="Zookeeper运维.html">
+            
+                <a href="Zookeeper运维.html">
+            
+                    
+                    Zookeeper运维
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../chapter4/Zookeeper进阶.html">
+            
+                <a href="../chapter4/Zookeeper进阶.html">
+            
+                    
+                    Zookeeper进阶
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../chapter5/Zookeeper类比.html">
+            
+                <a href="../chapter5/Zookeeper类比.html">
+            
+                    
+                    Zookeeper进阶
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../chapter6/Zookeeper实现原理.html">
+            
+                <a href="../chapter6/Zookeeper实现原理.html">
+            
+                    
+                    Zookeeper进阶
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Zookeeper运维</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="zookeeper&#x8FD0;&#x7EF4;">Zookeeper&#x8FD0;&#x7EF4;</h1>
+<h2 id="&#x5982;&#x4F55;&#x5B89;&#x88C5;&#x914D;&#x7F6E;&#x4E00;&#x4E2A;zookeeper&#x751F;&#x4EA7;&#x73AF;&#x5883;">&#x5982;&#x4F55;&#x5B89;&#x88C5;&#x914D;&#x7F6E;&#x4E00;&#x4E2A;ZooKeeper&#x751F;&#x4EA7;&#x73AF;&#x5883;</h2>
+<h3 id="&#x914D;&#x7F6E;&#x9879;">&#x914D;&#x7F6E;&#x9879;</h3>
+<ol>
+<li>clientPort: ZooKeeper&#x5BF9;&#x5BA2;&#x6237;&#x7AEF;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x7684;&#x7AEF;&#x53E3;&#x53F7;</li>
+<li>dataDir: &#x7528;&#x6765;&#x4FDD;&#x5B58;&#x5FEB;&#x7167;&#x6587;&#x4EF6;&#x7684;&#x76EE;&#x5F55;,&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8BBE;&#x7F6E;dataLogDir,&#x4E8B;&#x52A1;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x4E5F;&#x4F1A;&#x4FDD;&#x5B58;&#x5230;&#x8BE5;&#x76EE;&#x5F55;</li>
+<li>dataLogDir: &#x7528;&#x6765;&#x4FDD;&#x5B58;&#x4E8B;&#x52A1;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x7684;&#x76EE;&#x5F55;.&#x5728;Zookeeper&#x63D0;&#x4EA4;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x524D;,&#x8981;&#x4FDD;&#x8BC1;&#x4E8B;&#x52A1;&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x7684;&#x843D;&#x76D8;,&#x6240;&#x4EE5;&#x9700;&#x8981;&#x4E3A;dataLogDir&#x5206;&#x914D;&#x72EC;&#x5360;&#x7684;&#x5B58;&#x50A8;&#x8BBE;&#x5907;.</li>
+</ol>
+<h3 id="zookeeper&#x8282;&#x70B9;&#x786C;&#x4EF6;&#x8981;&#x6C42;">ZooKeeper&#x8282;&#x70B9;&#x786C;&#x4EF6;&#x8981;&#x6C42;</h3>
+<p>&#x7ED9;ZooKeeper&#x5206;&#x914D;&#x72EC;&#x5360;&#x7684;&#x670D;&#x52A1;&#x5668;,&#x8981;&#x7ED9;ZooKeeper&#x7684;&#x4E8B;&#x52A1;&#x65E5;&#x5FD7;&#x5206;&#x914D;&#x72EC;&#x7ACB;&#x5B58;&#x50A8;&#x8BBE;&#x5907;</p>
+<ol>
+<li>&#x5185;&#x5B58;:&#x4FDD;&#x5B58;data-tree,8G&#x5C31;&#x591F;&#x4E86;</li>
+<li>CPU:&#x4E0D;&#x592A;&#x6D88;&#x8017;CPU,&#x53EA;&#x8981;&#x4FDD;&#x8BC1;&#x80FD;&#x591F;&#x6709;&#x4E00;&#x4E2A;&#x72EC;&#x5360;CPU&#x6838;&#x5373;&#x53EF;,&#x4E24;&#x6838;&#x8DB3;&#x4EE5;</li>
+<li>&#x5B58;&#x50A8;:&#x5199;&#x5EF6;&#x8FDF;&#x4F1A;&#x5F71;&#x54CD;&#x4E8B;&#x52A1;&#x63D0;&#x4EA4;&#x6548;&#x7387;,&#x5EFA;&#x8BAE;&#x4E3A;dataLogDir&#x5206;&#x914D;&#x72EC;&#x7ACB;SSD&#x5B58;&#x50A8;</li>
+</ol>
+<h3 id="&#x65E5;&#x5FD7;&#x914D;&#x7F6E;&#x6587;&#x4EF6;">&#x65E5;&#x5FD7;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h3>
+<p>&#x4F7F;&#x7528;log4j,&#x4E0D;&#x591A;&#x8BF4;&#x4E86;</p>
+<h3 id="&#x5B89;&#x88C5;&#x914D;&#x7F6E;&#x6B65;&#x9AA4;">&#x5B89;&#x88C5;&#x914D;&#x7F6E;&#x6B65;&#x9AA4;</h3>
+<p>zkServer.sh start-foreground /Users/lacan/&#x65B0;&#x4E16;&#x754C;/2-&#x5DE5;&#x5177;/4-&#x5DE5;&#x5177;&#x5B89;&#x88C5;&#x6587;&#x4EF6;/apache-zookeeper-3.5.6-bin/conf/zoo-quorum-node1.cfg</p>
+<p>zkServer.sh start-foreground /Users/lacan/&#x65B0;&#x4E16;&#x754C;/2-&#x5DE5;&#x5177;/4-&#x5DE5;&#x5177;&#x5B89;&#x88C5;&#x6587;&#x4EF6;/apache-zookeeper-3.5.6-bin/conf/zoo-quorum-node2.cfg</p>
+<p>zkServer.sh start-foreground /Users/lacan/&#x65B0;&#x4E16;&#x754C;/2-&#x5DE5;&#x5177;/4-&#x5DE5;&#x5177;&#x5B89;&#x88C5;&#x6587;&#x4EF6;/apache-zookeeper-3.5.6-bin/conf/zoo-quorum-node3.cfg</p>
+<p>zkCli.sh -server &apos;127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183&apos;</p>
+<h2 id="&#x5982;&#x4F55;&#x8FDB;&#x884C;zookeeper&#x7684;&#x76D1;&#x63A7;">&#x5982;&#x4F55;&#x8FDB;&#x884C;ZooKeeper&#x7684;&#x76D1;&#x63A7;</h2>
+<h3 id="zookeeper&#x56DB;&#x5B57;&#x547D;&#x4EE4;">ZooKeeper&#x56DB;&#x5B57;&#x547D;&#x4EE4;</h3>
+<p>ruok/conf/stat/dump/wchc</p>
+<h3 id="jmsjconsole">JMS(jconsole)</h3>
+<h2 id="&#x901A;&#x8FC7;zookeeper-observer&#x5B9E;&#x73B0;&#x8DE8;&#x533A;&#x57DF;&#x90E8;&#x7F72;">&#x901A;&#x8FC7;ZooKeeper Observer&#x5B9E;&#x73B0;&#x8DE8;&#x533A;&#x57DF;&#x90E8;&#x7F72;</h2>
+<h3 id="zookeeper&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x5199;&#x8BF7;&#x6C42;">ZooKeeper&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x5199;&#x8BF7;&#x6C42;</h3>
+<p><img src="../img/ZooKeeper&#x5904;&#x7406;&#x5199;&#x8BF7;&#x6C42;&#x65F6;&#x5E8F;.png" alt="avatar"></p>
+<h4 id="&#x4EC0;&#x4E48;&#x662F;observer">&#x4EC0;&#x4E48;&#x662F;Observer</h4>
+<h5 id="&#x5E94;&#x7528;&#x573A;&#x666F;">&#x5E94;&#x7528;&#x573A;&#x666F;</h5>
+<p>&#x53C2;&#x8003;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>/Users/lacan/&#x65B0;&#x4E16;&#x754C;/2-&#x5DE5;&#x5177;/4-&#x5DE5;&#x5177;&#x5B89;&#x88C5;&#x6587;&#x4EF6;/apache-zookeeper-3.5.6-bin/conf/zoo-quorum-node4.cfg</code></p>
+<ol>
+<li>Observer&#x4E0D;&#x53C2;&#x4E0E;&#x63D0;&#x4EA4;&#x548C;&#x9009;&#x4E3E;&#x8FC7;&#x7A0B;,&#x53EF;&#x4EE5;&#x901A;&#x8FC7;Observer&#x8282;&#x70B9;&#x6765;&#x63D0;&#x9AD8;&#x6574;&#x4E2A;&#x96C6;&#x7FA4;&#x8BFB;&#x6027;&#x80FD;</li>
+<li>&#x5B9E;&#x73B0;&#x8DE8;&#x6570;&#x636E;&#x4E2D;&#x5FC3;&#x90E8;&#x7F72;</li>
+</ol>
+<h2 id="&#x901A;&#x8FC7;&#x52A8;&#x6001;&#x914D;&#x7F6E;&#x5B9E;&#x73B0;&#x4E0D;&#x4E2D;&#x65AD;&#x670D;&#x52A1;&#x7684;&#x96C6;&#x7FA4;&#x6210;&#x5458;&#x53D8;&#x66F4;">&#x901A;&#x8FC7;&#x52A8;&#x6001;&#x914D;&#x7F6E;&#x5B9E;&#x73B0;&#x4E0D;&#x4E2D;&#x65AD;&#x670D;&#x52A1;&#x7684;&#x96C6;&#x7FA4;&#x6210;&#x5458;&#x53D8;&#x66F4;</h2>
+<h3 id="&#x624B;&#x52A8;&#x96C6;&#x7FA4;&#x6210;&#x5458;&#x7BA1;&#x7406;">&#x624B;&#x52A8;&#x96C6;&#x7FA4;&#x6210;&#x5458;&#x7BA1;&#x7406;</h3>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../chapter2/Zookeeper开发.html" class="navigation navigation-prev " aria-label="Previous page: Zookeeper开发">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../chapter4/Zookeeper进阶.html" class="navigation navigation-next " aria-label="Next page: Zookeeper进阶">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Zookeeper运维","level":"1.4","depth":1,"next":{"title":"Zookeeper进阶","level":"1.5","depth":1,"path":"chapter4/Zookeeper进阶.md","ref":"chapter4/Zookeeper进阶.md","articles":[]},"previous":{"title":"Zookeeper开发","level":"1.3","depth":1,"path":"chapter2/Zookeeper开发.md","ref":"chapter2/Zookeeper开发.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["chapter-fold","katex"],"pluginsConfig":{"chapter-fold":{},"katex":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter3/Zookeeper运维.md","mtime":"2019-11-25T07:13:25.862Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-25T07:17:07.970Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
